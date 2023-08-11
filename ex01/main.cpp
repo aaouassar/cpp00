@@ -6,11 +6,10 @@
 /*   By: aaouassa <aaouassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 09:26:42 by aaouassa          #+#    #+#             */
-/*   Updated: 2023/08/06 17:27:53 by aaouassa         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:57:01 by aaouassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contact.hpp"
 #include "phonebook.hpp"
 
 void    contact::set_firstname(std::string f)
@@ -58,7 +57,9 @@ std::string contact::get_darkestsecret()
 int main(int ac, char **av)
 {
     phonebook phonebook;
-
+    int i = 0;
+    int icpy = i;
+    
     (void)av;
     if (ac != 1)
     {
@@ -66,19 +67,31 @@ int main(int ac, char **av)
         std::cout << " you should write ./phonebook" << std::endl;
         exit(1);
     }
-    std::cout << "Enter a command : ADD - SEARCH - EXIT" << std::endl;
+    
     while(1)
     {
+        std::cout << "Enter a command : ADD - SEARCH - EXIT" << std::endl;
         std::string command;
         getline(std::cin, command);
         if (std::cin.eof())
             break;
         if (command.empty())
-            std::cout << "choose a cammand bettwen ADD OR SEARCH OR EXIT" <<std::endl;
-
-        // if (command == "ADD")
-        //     phonebook.add_contact();
-        // if (command == "SEARCH")
-        //     phonebook.search_contact(); 
+            std::cout << "choose a cammand bettwen ADD OR SEARCH OR EXIT" << std::endl;
+        if (command == "ADD")
+        {
+            phonebook.add_contact(i);
+            i++;
+            if (icpy < 8)
+                icpy++;
+        }
+        if (i == 8)
+            i = 0;
+        else if (command == "SEARCH")
+        {
+            phonebook.search_contact(icpy);
+        }
+        else if (command == "EXIT")
+            return(0);
+        
     }
 }
